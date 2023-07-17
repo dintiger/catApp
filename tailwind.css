@@ -1,0 +1,61 @@
+.absolute {
+  position: absolute
+}
+
+.inset-x-9 {
+  left: 2.25rem;
+  right: 2.25rem
+}
+
+.bottom-12 {
+  bottom: 3rem
+}
+
+.m-auto {
+  margin: auto
+}
+
+.mr-11 {
+  margin-right: 2.75rem
+}
+
+.flex {
+  display: flex
+}
+
+.h-16 {
+  height: 4rem
+}
+
+.h-full {
+  height: 100%
+}
+
+.w-16 {
+  width: 4rem
+}
+
+.w-full {
+  width: 100%
+}
+
+.flex-1 {
+  flex: 1 1 0%
+}
+
+.flex-row {
+  flex-direction: row
+}
+
+.justify-center {
+  justify-content: center
+}
+
+.rounded-full {
+  border-radius: 9999px
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity))
+}
