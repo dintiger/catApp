@@ -1,23 +1,35 @@
 import { useTailwind } from "tailwind-rn";
 import React, { useCallback, useMemo, useRef } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import MapView from "react-native-maps";
 import { useGetLocation } from "../hooks/usegetlocation";
 import UploadButton from "../../assets/catUploadButton.svg";
 import CatList from "../../assets/catListButton.svg";
 
-import BottomSheet from "@gorhom/bottom-sheet";
+import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export function HomeScreen() {
   const tailwind = useTailwind();
   const getLocation = useGetLocation();
   console.log(getLocation);
 
-  const bottomSheetRef = useRef < BottomSheet > null;
-  const snapPoints = useMemo(() => ["25%", "50%"], []);
-  const handleSheetChanges = useCallback((index: number) => {
-    console.log("handleSheetChanges", index);
+  const bottomSheetRef = useRef(null);
+  const snapPoints = useMemo(() => ["50%"], []);
+  const handleOpenPress = useCallback(() => {
+    bottomSheetRef.current?.expand();
   }, []);
+  const handleClosePress = () => bottomSheetRef.current.close();
+  const renderBackdrop = useCallback(
+    (props) => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={-1}
+        appearsOnIndex={1}
+      />
+    ),
+    []
+  );
 
   return (
     <View style={tailwind("flex-1")}>
@@ -27,29 +39,29 @@ export function HomeScreen() {
           <View style={tailwind("bg-white rounded-full h-16 w-16 mr-11")}>
             <UploadButton style={tailwind("m-auto")} width={24} height={24} />
           </View>
-
-          <View style={tailwind("bg-white rounded-full h-16 w-16")}>
-            <CatList style={tailwind("m-auto")} width={24} height={24} />
-          </View>
+          <TouchableOpacity onPress={handleOpenPress}>
+            <View style={tailwind("bg-white rounded-full h-16 w-16")}>
+              <CatList style={tailwind("m-auto")} width={24} height={24} />
+            </View>
+          </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.container}>
-        <BottomSheet ref={bottomSheetRef} index={1} snapPoints={snapPoints} onChange={handleSheetChanges}>
-          <View style={styles.contentContainer}>
-            <Text>Awesome 🎉</Text>
-          </View>
-        </BottomSheet>
-      </View>
+      <BottomSheet
+        backdropComponent={renderBackdrop}
+        enablePanDownToClose
+        ref={bottomSheetRef}
+        index={-1}
+        snapPoints={snapPoints}
+      >
+        <View style={tailwind("flex-1")}>
+          <Text>Awesome 🎉</Text>
+        </View>
+      </BottomSheet>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-    backgroundColor: "grey",
-  },
   contentContainer: {
     flex: 1,
     alignItems: "center",
