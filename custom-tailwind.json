@@ -1,0 +1,8 @@
+{
+    "bg-pink": {
+        "style": {
+            "--tw-text-opacity": 1,
+            "backgroundColor": "rgb(249 194 255 / var(--tw-text-opacity))"
+        }
+    }
+}
