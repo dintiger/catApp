@@ -1,10 +1,43 @@
+.fixed {
+  position: fixed
+}
+
 .absolute {
   position: absolute
+}
+
+.relative {
+  position: relative
 }
 
 .inset-x-9 {
   left: 2.25rem;
   right: 2.25rem
+}
+
+.inset-x-2 {
+  left: 0.5rem;
+  right: 0.5rem
+}
+
+.inset-x-3 {
+  left: 0.75rem;
+  right: 0.75rem
+}
+
+.inset-x-1 {
+  left: 0.25rem;
+  right: 0.25rem
+}
+
+.inset-x-4 {
+  left: 1rem;
+  right: 1rem
+}
+
+.inset-x-5 {
+  left: 1.25rem;
+  right: 1.25rem
 }
 
 .bottom-12 {
@@ -37,6 +70,46 @@
 
 .right-20 {
   right: 5rem
+}
+
+.top-8 {
+  top: 2rem
+}
+
+.top-12 {
+  top: 3rem
+}
+
+.top-11 {
+  top: 2.75rem
+}
+
+.top-16 {
+  top: 4rem
+}
+
+.bottom-16 {
+  bottom: 4rem
+}
+
+.right-5 {
+  right: 1.25rem
+}
+
+.right-12 {
+  right: 3rem
+}
+
+.right-40 {
+  right: 10rem
+}
+
+.right-60 {
+  right: 15rem
+}
+
+.right-1 {
+  right: 0.25rem
 }
 
 .m-auto {
@@ -122,6 +195,10 @@
   height: 6rem
 }
 
+.h-screen {
+  height: 100vh
+}
+
 .w-16 {
   width: 4rem
 }
@@ -142,6 +219,14 @@
   width: 6rem
 }
 
+.w-1 {
+  width: 0.25rem
+}
+
+.w-20 {
+  width: 5rem
+}
+
 .max-w-sm {
   max-width: 24rem
 }
@@ -152,6 +237,10 @@
 
 .flex-row {
   flex-direction: row
+}
+
+.content-center {
+  align-content: center
 }
 
 .items-center {
