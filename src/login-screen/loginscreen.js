@@ -1,8 +1,42 @@
-import { View, Text, TextInput, Pressable, Image } from "react-native";
+import { View, Text, TextInput, Pressable, Image, TouchableOpacity } from "react-native";
 import { useTailwind } from "tailwind-rn";
-import CatLogin from "../../assets/catLogin.png";
+import React from "react";
+import auth from "../../firebase.config";
+
+import { useNavigation } from "@react-navigation/native";
+import RegisterScreen from "./registerscreen";
+import { signInAnonymously, signInWithEmailAndPassword } from "firebase/auth";
+
 export default function LoginScreen() {
   const tailwind = useTailwind();
+  const navigation = useNavigation();
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
+  function onLogin(email, password) {
+    console.log("onLogin func");
+    navigation.navigate("HomeScreen");
+    // signInAnonymously(auth)
+    //   .then((userCredential) => {
+    //     // Signed in
+    //     // const user = userCredential.user;
+    //     console.log("success");
+    //     // ...
+    //   })
+    //   .catch((error) => {
+    //     console.log("error:", error);
+    //     const errorCode = error.code;
+    //     const errorMessage = error.message;
+    //     console.log("error:", error.code);
+    //     console.log("error:", error.message);
+    //     // ..
+    //   });
+  }
+
+  function goRegisterScreen() {
+    navigation.navigate("RegisterScreen");
+  }
+
   return (
     <View style={tailwind(`flex-1 items-center justify-center bg-slate-50`)}>
       <View style={tailwind(`p-8 w-full max-w-sm`)}>
@@ -24,41 +58,47 @@ export default function LoginScreen() {
           style={tailwind(`w-full bg-white border border-slate-200 rounded-md h-12 px-4 mb-4`)}
           placeholderTextColor="#000"
           placeholder="Enter email address"
+          value={email}
+          autoCapitalize="none"
+          onChangeText={(txt) => setEmail(txt)}
         />
 
         <TextInput
           style={tailwind(`w-full bg-white border border-slate-200 rounded-md h-12 px-4`)}
           placeholderTextColor="#000"
+          value={password}
           placeholder="Enter password"
+          autoCapitalize="none"
+          secureTextEntry={true}
+          onChangeText={(txt) => setPassword(txt)}
         />
 
-        <View style={tailwind(`flex flex-row justify-between items-center my-8`)}>
-          <View style={tailwind(`flex-row items-center`)}>
-            <Pressable
-              style={tailwind(
-                `bg-white border border-slate-200 h-6 w-6 rounded-sm mr-2 flex items-center justify-center`
-              )}
-            >
-              {/* selected state */}
-              <View style={tailwind(`bg-green-400 w-4 h-4 rounded-sm`)} />
-            </Pressable>
-            <Text style={tailwind(`text-slate-900`)}>Remember me</Text>
-          </View>
-          <Pressable>
-            <Text style={tailwind(`text-blue-400 font-bold`)}>Reset password</Text>
-          </Pressable>
-        </View>
+        {/* selected state */}
 
-        <Pressable style={tailwind(`h-12 bg-yellow-400 rounded-md flex flex-row justify-center items-center px-6`)}>
-          <View style={tailwind(`flex-1 flex items-center`)}>
-            <Text style={tailwind(`text-black text-base font-medium`)}>Login</Text>
+        <TouchableOpacity
+          onPress={() => {
+            console.log("onLogin button");
+            onLogin(email, password);
+          }}
+        >
+          <View style={tailwind(`h-12 bg-yellow-400 rounded-md flex mt-6  flex-row justify-center items-center px-6`)}>
+            <View style={tailwind(`flex-1 flex items-center`)}>
+              <Text style={tailwind(`text-black text-base font-medium`)}>Login</Text>
+            </View>
           </View>
-        </Pressable>
-        <Pressable style={tailwind(`h-12 bg-black rounded-md mt-6 flex flex-row justify-center items-center px-6`)}>
-          <View style={tailwind(`flex-1 flex items-center`)}>
-            <Text style={tailwind(`text-white text-base font-medium`)}>Register</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            console.log("goRegScreen button");
+            goRegisterScreen();
+          }}
+        >
+          <View style={tailwind(`h-12 bg-black rounded-md mt-6 flex flex-row justify-center items-center px-6`)}>
+            <View style={tailwind(`flex-1 flex items-center`)}>
+              <Text style={tailwind(`text-white text-base font-medium`)}>Register</Text>
+            </View>
           </View>
-        </Pressable>
+        </TouchableOpacity>
       </View>
     </View>
   );

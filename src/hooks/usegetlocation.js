@@ -5,6 +5,7 @@ import * as Location from "expo-location";
 export function useGetLocation() {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -15,9 +16,14 @@ export function useGetLocation() {
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
+      setLocation(location.coords);
+      setIsLoading(false)
     })();
   }, []);
 
-  return { location, isError: !!errorMsg };
+  return {
+    location: location,
+    isError: !!errorMsg,
+    isLoading: isLoading
+  };
 }

@@ -24,8 +24,8 @@ export const CatBottomSheet = React.forwardRef((props, ref) => {
 
           <View style={tailwind("flex-1")}>
             <FlatList
-              data={props.catData}
-              renderItem={({ item }) => <Cat title={item.title} />}
+              data={props.cats}
+              renderItem={({ item }) => <Cat image={item.image} title={item.name} />}
               keyExtractor={(item) => item.id}
             />
           </View>
