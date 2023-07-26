@@ -17,11 +17,6 @@ export const UserProfile = React.forwardRef((props, ref) => {
         <View></View>
 
         <View style={tailwind("flex-1")}>
-          {/* <FlatList
-            data={DATA}
-            renderItem={({ item }) => <Item title={item.title} />}
-            keyExtractor={(item) => item.id}
-          /> */}
           <Text style={tailwind("text-lg")}>Amri</Text>
           <Text style={tailwind("text-lg")}>Email</Text>
           <Text style={tailwind("text-lg")}>Logout</Text>

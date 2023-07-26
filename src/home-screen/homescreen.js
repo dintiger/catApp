@@ -15,7 +15,7 @@ import { CatBottomSheet } from "./cat-bottomsheet";
 
 import { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { getCameraPermissionsAsync, Camera, CameraType } from "expo-camera";
+import { Camera, CameraType } from "expo-camera";
 
 export function HomeScreen() {
   const tailwind = useTailwind();
@@ -26,9 +26,9 @@ export function HomeScreen() {
   const [isCamera, setIsCamera] = React.useState(false);
   const [catList, setCatList] = React.useState([]);
 
-  const onRegionChange = (region) => {
-    console.log(region);
-  };
+  const [mapPitchEnabled, setMapPitchEnabled] = useState(true);
+  const [mapPitch, setMapPitch] = useState(150);
+ 
 
   const cameraRef = React.useRef(null);
   const uploadCatSheet = useRef(null);
@@ -131,6 +131,8 @@ export function HomeScreen() {
           <MapView
             style={tailwind("w-full h-full")}
             // onRegionChange={onRegionChange}
+            pitchEnabled={mapPitchEnabled} // Enable or disable pitch gestures on the map
+            pitch={mapPitch} // Set the initial pitch angle of the map
             showsUserLocation={true}
             followsUserLocation={true}
             initialRegion={{
